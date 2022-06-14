@@ -1,0 +1,21 @@
+# mybatis 관련 설정
+mybatis:
+  # resources/mybatis/mapper/ 에 있는 모든 xml 파일
+  mapper-locations: mybatis/mapper/**/*.xml
+  # alias 설정
+  type-alias-package: com.uk0ok.kakaoMap
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+  datasource:
+    url: jdbc:oracle:thin:@192.168.0.105:1521:xe
+    username: ercg
+    password: qhfkao12#
+    driver-class-name: oracle.jdbc.OracleDriver
+
+
+

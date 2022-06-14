@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+        "-//mybatis.org//DTD Config 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uk0ok.kakaoMap.mapper.TestMapper">
+    <select id="getTest" resultType="java.util.HashMap">
+        SELECT
+            lclas_cd      AS sptint_se_cd /* 지원기관분류코드 */,
+            lclas_nm      AS sptint_se_nm /* 지원기관분류명 */,
+            sclas_nm      AS sptint_nm /* 지원기관명 */,
+            int_xcts      AS int_xcts /* 지원기관 GIS_X좌표 */,
+            int_ycts      AS int_ycts /* 지원기관 GIS_Y좌표 */,
+            stc     AS stc /* 지원기관코드 */,
+            int_legd_ads  AS int_legd_ads /* 지원기관법정동주소 */,
+            int_rnad      AS int_rnad /* 지원기관도로명주소 */,
+            int_day_ctp   AS int_day_ctp /* 지원기관연락처(주간) */,
+            int_nigt_ctp  AS int_nigt_ctp /* 지원기관연락처(야간) */,
+            hsptl_yn      AS hsptl_yn /* 병원 여부 */,
+            ermctplace_yn AS ermctplace_yn /* 응급의료기관 여부 */,
+            hqp_yn        AS hqp_yn /* 민간중장비업체 여부 */,
+            emsnpc_yn     AS emsnpc_yn /* 긴급대피소 여부 */,
+            dstr_af_yn    AS dstr_af_yn /* 이재민수용시설 여부 */,
+            rs_aspc_yn    AS rs_aspc_yn /* 자원집결지 여부 */,
+            (
+                CASE
+                    WHEN hsptl_yn = 'N'
+                        AND ermctplace_yn = 'N'
+                        AND hqp_yn = 'N'
+                        AND emsnpc_yn = 'N'
+                        AND dstr_af_yn = 'N'
+                        AND rs_aspc_yn = 'N' THEN
+                        'Y'
+                    ELSE
+                        'N'
+                    END
+                )                  AS etc_fac /* 기타 여부 */
+        FROM instt_cd
+        WHERE lclas_cd NOT IN 'A1'
+    </select>
+</mapper>
